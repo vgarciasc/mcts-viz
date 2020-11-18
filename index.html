@@ -1,0 +1,89 @@
+<meta charset="utf-8">
+<html>
+    <head>
+        <title>mcts test</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js" integrity="sha256-WVsM3xrcqyuFNF3W1qtIKbHFsD0977nDQA8DCMp1zCw=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js" integrity="sha256-2/3R3NV5zryj0fDjD3cDh+SNiWQ/TJiMVZzAo5FrhiU=" crossorigin="anonymous"></script>
+        <script src="./draw_tree.js"></script>
+        <script src="./lib/tree.js"></script>
+        <script src="./interactive.js"></script>
+        <script src="./tree_vis.js"></script>
+        <script src="./lib/tictactoe.js"></script>
+        <script src="./lib/mcts.js"></script>
+        <script src="./sketch.js"></script>
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+        <!-- <script src="./sketch.js"></script> -->
+        <!-- <script src="./lib/nn.js"></script> -->
+        <style>
+            .selection       { color: rgb(180, 30,  30); }
+            .expansion       { color: rgb(30, 180,  30); }
+            .simulation      { color: rgb(30, 180, 180); }
+            .backpropagation { color: rgb(30,  30, 180); }
+        </style>
+    </head>
+    <body onLoad="setupInteractive()">
+        <h1>MCTS Tic-tac-toe (<i>Monte Carlo Tree Search</i>)</h1>
+        <div style="width: auto; float: left; border: solid 1px black; padding: 1em;">
+            <div id="canvascontainer"></div>
+            <p id="starting_player_area">
+                <b>Who will start the game?</b>
+                <br>
+                <button onclick="myp5.selectStartingPlayer(0)">HUMAN (You!)</button>
+                <button onclick="myp5.selectStartingPlayer(1)">MACHINE</button>
+            </p>
+            <p id="whoseturn_area">
+                <b>Whose turn?</b> <span id="whoseturn">HUMAN</span>
+            </p>
+            <div id="machine_controls_area">
+                <b>Machine controls:</b>
+                <div style="background-color: rgb(230, 230, 230); padding: 1em">                
+                    <button onclick="myp5.machineRandomMove()">Make random move</button>
+                    <br>
+                    <button onclick="myp5.machineMctsMove()">Make MCTS move</button>
+                    <br>
+                    <br>
+                    Run MCTS for:
+                    <br>
+                    <input id="mcts_timeout_slider" type="range" min="100" max="2000" value="1000" step="100"/>
+                    <br>
+                    <span id="mcts_timeout_span"><b>1</b></span> iterations
+                </div>
+            </div>
+            <div id="game_over_area">
+                <b>The winner is...</b> <span id="game_over_winner">HUMAN</span>!
+                <br>
+                <center>
+                    <button onclick="myp5.reset()">Restart game</button>
+                </center>
+            </div>
+        </div>
+        <div style="width: auto; margin-left: 2em; float: left; border: solid 1px black">
+            <div style="border: solid 1px lightgrey; height: 70px">
+                <div style="float: left; height: 100%; width: auto; padding: 0.25em">
+                    <b>Current action</b>:
+                    <br>
+                    <span id="current_action_count">(0/0)</span>
+                    <br>
+                    <span id="current_action_kind">---</span>
+                    <br>
+                    <button id="btn_next_action" disabled>next action &gt;</button>
+                </div>
+                <div style="float: left; height: 100%; width: auto; padding: 0.25em;">
+                    <b>Current iteration</b>:
+                    <br>
+                    <span id="current_iteration_count">(0/0)</span>
+                    <br>
+                    <br>
+                    <button id="btn_next_iteration" disabled>next iteration &gt;&gt;</button>
+                </div>
+                <div style="float: left; height: 100%; width: auto; margin-top: 0.2em; margin-bottom: 0.2em;">
+                    <button style="width: 200px; height: 45%; margin-bottom: 0.2em;" id="btn_last_step" disabled>visualize last step &gt;&gt;&gt;</button>
+                    <br>
+                    <button style="width: 200px; height: 45%;" id="btn_make_play" disabled>make play</button>
+                </div>
+            </div>
+            <div id="tree_vis"></div>
+        </div>
+    </body>
+</html>
