@@ -12,9 +12,6 @@
         <script src="./lib/tictactoe.js"></script>
         <script src="./lib/mcts.js"></script>
         <script src="./sketch.js"></script>
-        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-        <!-- <script src="./sketch.js"></script> -->
-        <!-- <script src="./lib/nn.js"></script> -->
         <style>
             .selection       { color: rgb(180, 30,  30); }
             .expansion       { color: rgb(30, 180,  30); }
@@ -24,6 +21,7 @@
     </head>
     <body onLoad="setupInteractive()">
         <h1>MCTS Tic-tac-toe (<i>Monte Carlo Tree Search</i>)</h1>
+        <h4><a href="https://github.com/vgarciasc/mcts-viz>GitHub</a></h4>
         <div style="width: auto; float: left; border: solid 1px black; padding: 1em;">
             <div id="canvascontainer"></div>
             <p id="starting_player_area">
