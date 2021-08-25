@@ -276,7 +276,7 @@ const vis = (s) => {
   }
 
   s.mouseWheel = (event) => {
-    zoom += sensitivity * event.delta;
+    zoom += sensitivity * -event.delta;
     zoom = s.constrain(zoom, zMin, zMax);
     return false;
   }
